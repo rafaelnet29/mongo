@@ -1,3 +1,7 @@
+/*
+/Classe modelo com os 
+/métodos GET e SET 
+*/
 package com.br.mongo;
 
 

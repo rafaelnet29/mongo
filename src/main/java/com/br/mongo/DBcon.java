@@ -18,12 +18,14 @@ public class DBcon {
 
     private MongoClient client;
     private MongoDatabase db;
-    private Model model;
-
+    private final Model model;
+    
+    //Método construtor
     public DBcon() {
         model = new Model();
     }
-
+    
+    //Método de conexão com banco
     public void Connect() {
         client = new MongoClient("localhost", 27017);
         if (client != null) {
@@ -34,7 +36,8 @@ public class DBcon {
             System.out.print("Problemas com a conexão");
         }
     }
-
+    
+    //Método de inserção de dados
     public void InsertOneDoc() {
 
         model.setId(JOptionPane.showInputDialog("Informe o id do document: "));
@@ -55,7 +58,8 @@ public class DBcon {
         db.getCollection("nomes").insertOne(doc);
         JOptionPane.showMessageDialog(null, " Dados insiridos com sucesso ");
     }
-
+    
+    //Método para listar os Documents
     public void FindAll() {
         db.getCollection("nomes").find().forEach(new Consumer<Document>() {
             @Override
@@ -64,7 +68,8 @@ public class DBcon {
             }
         });
     }
-
+    
+    //Método para busca de um único document
     public void findOne() {
 
         String chave = JOptionPane.showInputDialog("Chave : ");
@@ -81,7 +86,9 @@ public class DBcon {
             }
         });
     }
+    
     //Em desenvolvimento
+    //Método para atualizar document
     public void update(){
         /*Estava tudo errado
         /de volta a fase de 

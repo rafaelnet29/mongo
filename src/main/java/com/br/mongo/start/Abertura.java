@@ -12,7 +12,12 @@ public class Abertura {
         db = new DBcon();
         db.Connect();
     }
-
+    
+    /**
+     *Mostra o menu e inicial 
+     * chamando todos os métodos para iniciar 
+     * a aplicação
+    */
     public void Start() {       
 
         do {

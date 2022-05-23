@@ -1,6 +1,6 @@
 package com.br.mongo.start;
 
-public class Mongo {
+public class MongoStart {
 
     public static void main(String[] args) {
         new Abertura().Start();
