@@ -83,20 +83,9 @@ public class DBcon {
     }
     //Em desenvolvimento
     public void update(){
-        String chaves = JOptionPane.showInputDialog("Entre com a chave: ");
-        String values = JOptionPane.showInputDialog("Entre com o valor: ");
-        BasicDBObject cve = new BasicDBObject();
-        cve.put(chaves, values);
-        
-        String chaves2 = JOptionPane.showInputDialog("Entre com a chave: ");
-        String values2 = JOptionPane.showInputDialog("Entre com o valor para atualizar: ");
-        BasicDBObject vls = new BasicDBObject();
-        vls.put(chaves2, values2);
-       
-        BasicDBObject cve2 = new BasicDBObject();
-        cve2.put("$set", vls);
-        
-        db.getCollection("nomes").updateOne(cve, cve2);
-        //FindAll();
+        /*Estava tudo errado
+        /de volta a fase de 
+        /planejamento e densevolvimento
+        */
     }
 }
