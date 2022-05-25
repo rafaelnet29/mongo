@@ -38,8 +38,6 @@ public class Abertura {
             }if (opc == 4){
                 //db.update();
                 JOptionPane.showMessageDialog(null, "Esta opção esta em Desenvolvimento");
-            }else{
-                JOptionPane.showMessageDialog(null, " Até mais! --->");
             }
         } while (opc != 0);
     }

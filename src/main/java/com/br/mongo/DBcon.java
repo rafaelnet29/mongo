@@ -1,23 +1,19 @@
 package com.br.mongo;
 
-import com.mongodb.BasicDBObject;
+
 import com.mongodb.MongoClient;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoDatabase;
-import static java.lang.System.in;
-import java.util.AbstractList;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import com.mongodb.client.MongoCollection;
 import java.util.function.Consumer;
 import javax.swing.JOptionPane;
 import org.bson.Document;
-import org.bson.conversions.Bson;
+
 
 public class DBcon {
 
-    private MongoClient client;
+    private MongoClient client = null;
     private MongoDatabase db;
+    private MongoCollection<Document> coll;
     private final Model model;
     
     //Método construtor
@@ -31,6 +27,7 @@ public class DBcon {
         if (client != null) {
 
             db = client.getDatabase("banco");
+            coll = db.getCollection("nomes");
             System.out.print("Conectado com sucesso !");
         } else {
             System.out.print("Problemas com a conexão");
@@ -54,14 +51,14 @@ public class DBcon {
         doc.append(model.getId(), model.getIdValor());
         doc.append(model.getNome(), model.getNomeValor());
         doc.append(model.getIddChave(), model.getIddValor());
-
-        db.getCollection("nomes").insertOne(doc);
+        
+        coll.insertOne(doc);
         JOptionPane.showMessageDialog(null, " Dados insiridos com sucesso ");
     }
     
     //Método para listar os Documents
     public void FindAll() {
-        db.getCollection("nomes").find().forEach(new Consumer<Document>() {
+        coll.find().forEach(new Consumer<Document>() {
             @Override
             public void accept(Document docs) {
                 System.out.println("\n" + docs.toJson() + "\n");
@@ -70,13 +67,13 @@ public class DBcon {
     }
     
     //Método para busca de um único document
-    public void findOne() {
+    public Document findOne() {
 
         String chave = JOptionPane.showInputDialog("Chave : ");
         String valor = JOptionPane.showInputDialog("Valor : ");
 
         Document doc = new Document(chave, valor);
-        db.getCollection("nomes").find(doc).forEach(new Consumer<Document>() {
+        coll.find(doc).forEach(new Consumer<Document>() {
             @Override
             public void accept(Document doc) {
                 Document[] nomes = {doc};
@@ -85,6 +82,7 @@ public class DBcon {
                 }
             }
         });
+        return doc;
     }
     
     //Em desenvolvimento
