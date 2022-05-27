@@ -89,19 +89,22 @@ public class DBcon {
     //Em desenvolvimento
     //Método para atualizar document
     public void update(){
-        /*Estava tudo errado
-        /de volta a fase de 
-        /planejamento e densevolvimento
-        */
+       
         String cve = JOptionPane.showInputDialog("chave: ");
         String vlr = JOptionPane.showInputDialog("valor: ");
+        BasicDBObject docx = new BasicDBObject(cve,vlr);
+        docx.put(cve, vlr);
         
-        Document docx = new Document();
-        docx.put(cve,vlr);
+        String cve2 = JOptionPane.showInputDialog("chave: ");
+        String vlr2 = JOptionPane.showInputDialog("valor: ");
+        BasicDBObject docy = new BasicDBObject(cve2,vlr2);
+        docy.put(cve2,vlr2);
         
-        Document docy = new Document();
-        docy.put("nome","Hidan");
+        //String cve3 = JOptionPane.showInputDialog("chave: ");
+        //String vlr3 = JOptionPane.showInputDialog("valor: ");
+        BasicDBObject docz = new BasicDBObject();
+        docz.put(docx.toJson(),docy);
         
-        coll.updateOne(docx, docy);
+        coll.updateMany(docy, docz);
     }
 }
