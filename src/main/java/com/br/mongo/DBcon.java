@@ -1,6 +1,7 @@
 package com.br.mongo;
 
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
@@ -92,5 +93,15 @@ public class DBcon {
         /de volta a fase de 
         /planejamento e densevolvimento
         */
+        String cve = JOptionPane.showInputDialog("chave: ");
+        String vlr = JOptionPane.showInputDialog("valor: ");
+        
+        Document docx = new Document();
+        docx.put(cve,vlr);
+        
+        Document docy = new Document();
+        docy.put("nome","Hidan");
+        
+        coll.updateOne(docx, docy);
     }
 }

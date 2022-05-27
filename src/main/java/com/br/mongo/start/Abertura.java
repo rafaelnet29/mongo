@@ -36,8 +36,8 @@ public class Abertura {
             }if (opc == 3) {
                 db.findOne();
             }if (opc == 4){
-                //db.update();
-                JOptionPane.showMessageDialog(null, "Esta opção esta em Desenvolvimento");
+                db.update();
+                //JOptionPane.showMessageDialog(null, "Esta opção esta em Desenvolvimento");
             }
         } while (opc != 0);
     }
