@@ -1,6 +1,5 @@
 package com.br.mongo;
 
-
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
@@ -8,7 +7,6 @@ import com.mongodb.client.MongoCollection;
 import java.util.function.Consumer;
 import javax.swing.JOptionPane;
 import org.bson.Document;
-
 
 public class DBcon {
 
@@ -37,7 +35,6 @@ public class DBcon {
     
     //Método de inserção de dados
     public void InsertOneDoc() {
-
         model.setId(JOptionPane.showInputDialog("Informe o id do document: "));
         model.setIdValor(JOptionPane.showInputDialog("Informe o valor do id"));
         model.setNome(JOptionPane.showInputDialog("Informe o chave nome: "));
@@ -69,7 +66,6 @@ public class DBcon {
     
     //Método para busca de um único document
     public Document findOne() {
-
         String chave = JOptionPane.showInputDialog("Chave : ");
         String valor = JOptionPane.showInputDialog("Valor : ");
 
@@ -89,7 +85,6 @@ public class DBcon {
     //Em desenvolvimento
     //Método para atualizar document
     public void update(){
-       
         String cve = JOptionPane.showInputDialog("chave: ");
         String vlr = JOptionPane.showInputDialog("valor: ");
         BasicDBObject docx = new BasicDBObject(cve,vlr);
