@@ -11,8 +11,12 @@ public class Model {
    private String idValor;
    private String nome;
    private String nomeValor;
-   private String iddChave;
-   private int iddValor;
+   private String idadeChave;
+   private int idadeValor;
+   private String descricaoChave;
+   private String descricaoValor;
+   private String tecnicasChave;
+   private String tecnicasValor;    
    
    public Model(){
    }
@@ -49,19 +53,51 @@ public class Model {
         this.nomeValor = nomeValor;
     }
 
-    public String getIddChave() {
-        return iddChave;
+    public String getIdadeChave() {
+        return idadeChave;
     }
 
-    public void setIddChave(String iddChave) {
-        this.iddChave = iddChave;
+    public void setIdadeChave(String idadeChave) {
+        this.idadeChave = idadeChave;
     }
 
-    public int getIddValor() {
-        return iddValor;
+    public int getIdadeValor() {
+        return idadeValor;
     }
 
-    public void setIddValor(int iddValor) {
-        this.iddValor = iddValor;
+    public void setIddValor(int idadeValor) {
+        this.idadeValor = idadeValor;
+    }
+    
+    public String getDescricaoChave() {
+        return descricaoChave;
+    }
+
+    public void setDescricaoChave(String descricaoChave) {
+        this.descricaoChave = descricaoChave;
+    }
+    
+     public String getTecnicasChave() {
+        return tecnicasChave;
+    }
+
+    public void setTecnicasChave(String tecnicasChave) {
+        this.tecnicasChave = tecnicasChave;
+    }
+    
+    public String getDescricaoValor() {
+        return descricaoValor;
+    }
+
+    public void setDescricaoValor(String descricaoValor) {
+        this.descricaoValor = descricaoValor;
+    }
+    
+     public String getTecnicasValor() {
+        return tecnicasValor;
+    }
+
+    public void setTecnicasValor(String tecnicasValor) {
+        this.tecnicasValor = tecnicasValor;
     }
 }

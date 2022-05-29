@@ -4,6 +4,9 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Consumer;
 import javax.swing.JOptionPane;
 import org.bson.Document;
@@ -39,16 +42,20 @@ public class DBcon {
         model.setIdValor(JOptionPane.showInputDialog("Informe o valor do id"));
         model.setNome(JOptionPane.showInputDialog("Informe o chave nome: "));
         model.setNomeValor(JOptionPane.showInputDialog("Informe o valor do nome: "));
-        model.setIddChave(JOptionPane.showInputDialog("Informe a chave da idade: "));
+        model.setIdadeChave(JOptionPane.showInputDialog("Informe a chave da idade: "));
         model.setIddValor(Integer.parseInt(JOptionPane.showInputDialog("Informe o valor da idade: ")));
-
+        model.setDescricaoChave(JOptionPane.showInputDialog("Informe a chave da descrição: "));
+        model.setDescricaoValor(JOptionPane.showInputDialog("Informe o valor da descrição: "));
+        model.setTecnicasChave(JOptionPane.showInputDialog("Informe a chave da tecnicas: "));
+        model.setTecnicasValor(JOptionPane.showInputDialog("Informe o valor da tecnicas: "));
+        
         //Preparando Document
         Document doc = new Document();
 
         //inserindo dados no Document
-        doc.append(model.getId(), model.getIdValor());
-        doc.append(model.getNome(), model.getNomeValor());
-        doc.append(model.getIddChave(), model.getIddValor());
+        doc.append(model.getId(), model.getIdValor()).append(model.getNome(), model.getNomeValor())
+                .append(model.getIdadeChave(), model.getIdadeValor()).append(model.getDescricaoChave(), model.getDescricaoValor()
+                ).append(model.getTecnicasChave(), Arrays.asList(model.getTecnicasValor()));
         
         coll.insertOne(doc);
         JOptionPane.showMessageDialog(null, " Dados insiridos com sucesso ");
@@ -85,21 +92,6 @@ public class DBcon {
     //Em desenvolvimento
     //Método para atualizar document
     public void update(){
-        String cve = JOptionPane.showInputDialog("chave: ");
-        String vlr = JOptionPane.showInputDialog("valor: ");
-        BasicDBObject docx = new BasicDBObject(cve,vlr);
-        docx.put(cve, vlr);
-        
-        String cve2 = JOptionPane.showInputDialog("chave: ");
-        String vlr2 = JOptionPane.showInputDialog("valor: ");
-        BasicDBObject docy = new BasicDBObject(cve2,vlr2);
-        docy.put(cve2,vlr2);
-        
-        //String cve3 = JOptionPane.showInputDialog("chave: ");
-        //String vlr3 = JOptionPane.showInputDialog("valor: ");
-        BasicDBObject docz = new BasicDBObject();
-        docz.put(docx.toJson(),docy);
-        
-        coll.updateMany(docy, docz);
+      //sem funcionar
     }
 }
