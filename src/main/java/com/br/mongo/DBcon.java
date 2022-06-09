@@ -1,7 +1,6 @@
 package com.br.mongo;
 
 import com.br.interfaces.ChavesImplements;
-import com.br.interfaces.InterfaceChaves;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
@@ -19,11 +18,12 @@ public class DBcon {
     private MongoCollection<Document> coll;
     private final Model model;
     ChavesImplements ci = null;
-
+    List<String> tec;
     //Método construtor
     public DBcon() {
         model = new Model();
         ci = new ChavesImplements();
+        tec = new ArrayList<String>();
     }
 
     //Método de conexão com banco
@@ -46,17 +46,20 @@ public class DBcon {
         model.setIddValor(Integer.parseInt(JOptionPane.showInputDialog("Informe o valor da idade: ")));
         model.setDescricaoValor(JOptionPane.showInputDialog("Informe o valor da descrição: "));
         model.setTecnicasValor(JOptionPane.showInputDialog("Informe o valor da tecnicas: "));
-
+        String []texto = model.getTecnicasValor().split(",");
+        for(int i = 0; i < texto.length; i++){
+            tec.add(" " + texto[i]);
+        }     
+        
         //Preparando Document
         Document doc = new Document();
-
         //inserindo dados no Document
         doc.append(ci.Id(), model.getIdValor()).append(ci.Nome(), model.getNomeValor())
                 .append(ci.Idade(), model.getIddValor()).append(ci.Descricao(), model.getDescricaoValor())
-                .append(ci.Tecnicas(), Arrays.asList(model.getTecnicasValor()));
-
+                .append(ci.Tecnicas(), tec);
         coll.insertOne(doc);
         JOptionPane.showMessageDialog(null, " Dados insiridos com sucesso ");
+        client.close();
     }
 
     //Método para listar os Documents
@@ -67,6 +70,7 @@ public class DBcon {
                 System.out.println("\n" + docs.toJson() + "\n");
             }
         });
+        client.close();
     }
 
     //Método para busca de um único document
@@ -84,6 +88,7 @@ public class DBcon {
                 }
             }
         });
+        client.close();
         return doc;
     }
 
