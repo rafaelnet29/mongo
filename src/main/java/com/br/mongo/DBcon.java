@@ -5,7 +5,6 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 import javax.swing.JOptionPane;
@@ -19,18 +18,19 @@ public class DBcon {
     private final Model model;
     ChavesImplements ci = null;
     List<String> tec;
+
     //Método construtor
     public DBcon() {
         model = new Model();
         ci = new ChavesImplements();
-        tec = new ArrayList<String>();
+        tec = new ArrayList<>();
     }
 
     //Método de conexão com banco
     public void Connect() {
         client = new MongoClient("localhost", 27017);
-        if (client != null) {
 
+        if (client != null) {
             db = client.getDatabase("banco");
             coll = db.getCollection("nomes");
             JOptionPane.showMessageDialog(null, "Conectado com sucesso !");
@@ -46,20 +46,20 @@ public class DBcon {
         model.setIddValor(Integer.parseInt(JOptionPane.showInputDialog("Informe o valor da idade: ")));
         model.setDescricaoValor(JOptionPane.showInputDialog("Informe o valor da descrição: "));
         model.setTecnicasValor(JOptionPane.showInputDialog("Informe o valor da tecnicas: "));
-        String []texto = model.getTecnicasValor().split(",");
-        for(int i = 0; i < texto.length; i++){
-            tec.add(" " + texto[i]);
-        }     
-        
+        String[] texto = model.getTecnicasValor().split(",");
+        for (String tex : texto) {
+            tec.add(tex);
+        }
+
         //Preparando Document
         Document doc = new Document();
         //inserindo dados no Document
         doc.append(ci.Id(), model.getIdValor()).append(ci.Nome(), model.getNomeValor())
-                .append(ci.Idade(), model.getIddValor()).append(ci.Descricao(), model.getDescricaoValor())
+                .append(ci.Idade(), model.getIddValor())
+                .append(ci.Descricao(), model.getDescricaoValor())
                 .append(ci.Tecnicas(), tec);
         coll.insertOne(doc);
         JOptionPane.showMessageDialog(null, " Dados insiridos com sucesso ");
-        client.close();
     }
 
     //Método para listar os Documents
@@ -70,7 +70,6 @@ public class DBcon {
                 System.out.println("\n" + docs.toJson() + "\n");
             }
         });
-        client.close();
     }
 
     //Método para busca de um único document
@@ -88,7 +87,6 @@ public class DBcon {
                 }
             }
         });
-        client.close();
         return doc;
     }
 
