@@ -42,7 +42,7 @@ public class Abertura {
                 }
             } while (opc != 0);
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Formato invalido de opção ", "Opção entre 0 e 4 " , 1);
+            JOptionPane.showMessageDialog(null, "Formato invalido de opção ", "Opções entre 0 e 5 " , 1);
             Start();
         }
     }
