@@ -95,6 +95,7 @@ public class DBcon {
         //sem funcionar
     }
 
+    //Método para deletar Documents
     public void deleteOne() {
         Document doc = findOne();
         int opc = JOptionPane.showConfirmDialog(null, "Tem certeza que quer deletar o Document? " + doc, "Atenção !!", JOptionPane.YES_NO_CANCEL_OPTION);
