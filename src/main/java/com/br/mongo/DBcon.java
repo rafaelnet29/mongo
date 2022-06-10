@@ -90,9 +90,22 @@ public class DBcon {
         return doc;
     }
 
-    //Em desenvolvimento
-    //Método para atualizar document
+    //Em desenvolvimento Método para atualizar document
     public void update() {
         //sem funcionar
+    }
+
+    public void deleteOne() {
+        Document doc = findOne();
+        int opc = JOptionPane.showConfirmDialog(null, "Tem certeza que quer deletar o Document? " + doc, "Atenção !!", JOptionPane.YES_NO_CANCEL_OPTION);
+
+        if (opc == 0) {
+            coll.deleteOne(doc);
+            JOptionPane.showMessageDialog(null, "Document deletado com Sucesso!");
+        }else if(opc == 1){
+            JOptionPane.showMessageDialog(null, "Document não deletado!");
+        }else{
+            JOptionPane.showMessageDialog(null, "Operação cancelada!");
+        }
     }
 }

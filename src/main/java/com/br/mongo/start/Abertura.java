@@ -22,11 +22,9 @@ public class Abertura {
             do {
                 opc = Integer.parseInt(JOptionPane.showInputDialog(null, " --> Escolha uma opção:"
                         + " <-- \n"
-                        + " -> 1 - Inserir\n"
-                        + " -> 2 - Listar\n"
-                        + " -> 3 - Buscar\n"
-                        + " -> 4 - Atualiza (Manutanção)\n"
-                        + " -> 0 - Sair ", " Menu ", 1));
+                        + "1 - Inserir " + " | " + "2 - Listar\n"
+                        + "3 - Buscar "  + " | " + " 4 - Atualiza (Manutanção)\n"
+                        + "5 - Deletar " + " | " + " 0 - Sair ", " Menu ", 1));
 
                 if (opc == 1) {
                     db.InsertOneDoc();
@@ -37,6 +35,8 @@ public class Abertura {
                 } else if (opc == 4) {
                     db.update();
                     JOptionPane.showMessageDialog(null, "Esta opção esta em Desenvolvimento");
+                }else if(opc == 5){
+                    db.deleteOne();
                 }else {
                     JOptionPane.showMessageDialog(null, " Até mais!");
                 }
