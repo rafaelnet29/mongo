@@ -9,7 +9,7 @@ public class ChavesImplements implements InterfaceChaves{
 
     @Override
     public String Nome() {
-        return "Nome";
+        return "nome";
     }
 
     @Override

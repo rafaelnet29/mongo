@@ -46,10 +46,7 @@ public class DBcon {
         model.setIddValor(Integer.parseInt(JOptionPane.showInputDialog("Informe o valor da idade: ")));
         model.setDescricaoValor(JOptionPane.showInputDialog("Informe o valor da descrição: "));
         model.setTecnicasValor(JOptionPane.showInputDialog("Informe o valor da tecnicas: "));
-        String[] texto = model.getTecnicasValor().split(",");
-        for (String tex : texto) {
-            tec.add(tex);
-        }
+        aux();
 
         //Preparando Document
         Document doc = new Document();
@@ -90,23 +87,44 @@ public class DBcon {
         return doc;
     }
 
-    //Em desenvolvimento Método para atualizar document
-    public void update() {
-        //sem funcionar
+    /**
+     * Método para atualizar document
+     * apenas com o operador $set
+     */ 
+    public void updateOne() {
+        Document doc = findOne();
+        String chave = JOptionPane.showInputDialog("Chave : ");
+        String valor = JOptionPane.showInputDialog("Valor : ");
+
+        Document doc2 = new Document(chave, valor);
+
+        coll.updateOne(new Document(doc), new Document("$set", new Document(doc2)));
+        JOptionPane.showMessageDialog(null, "Document atualizado com sucesso!");
+        FindAll();
     }
 
     //Método para deletar Documents
     public void deleteOne() {
         Document doc = findOne();
-        int opc = JOptionPane.showConfirmDialog(null, "Tem certeza que quer deletar o Document? " + doc, "Atenção !!", JOptionPane.YES_NO_CANCEL_OPTION);
+        int opc = JOptionPane.showConfirmDialog(null, "Tem certeza que quer deletar o Document? " 
+                + doc, "Atenção !!", JOptionPane.YES_NO_CANCEL_OPTION);
 
         if (opc == 0) {
             coll.deleteOne(doc);
             JOptionPane.showMessageDialog(null, "Document deletado com Sucesso!");
-        }else if(opc == 1){
+            FindAll();
+        } else if (opc == 1) {
             JOptionPane.showMessageDialog(null, "Document não deletado!");
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Operação cancelada!");
+        }
+    }
+    
+    //Método auxiliar para insertOne
+    public void aux() {
+        String[] texto = model.getTecnicasValor().split(",");
+        for (String tex : texto) {
+            tec.add(tex);
         }
     }
 }

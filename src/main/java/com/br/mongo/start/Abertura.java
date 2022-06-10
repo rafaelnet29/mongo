@@ -23,7 +23,7 @@ public class Abertura {
                 opc = Integer.parseInt(JOptionPane.showInputDialog(null, " --> Escolha uma opção:"
                         + " <-- \n"
                         + "1 - Inserir " + " | " + "2 - Listar\n"
-                        + "3 - Buscar "  + " | " + " 4 - Atualiza (Manutanção)\n"
+                        + "3 - Buscar "  + " | " + " 4 - Atualiza\n"
                         + "5 - Deletar " + " | " + " 0 - Sair ", " Menu ", 1));
 
                 if (opc == 1) {
@@ -33,8 +33,7 @@ public class Abertura {
                 } else if (opc == 3) {
                     db.findOne();
                 } else if (opc == 4) {
-                    db.update();
-                    JOptionPane.showMessageDialog(null, "Esta opção esta em Desenvolvimento");
+                    db.updateOne();
                 }else if(opc == 5){
                     db.deleteOne();
                 }else {
