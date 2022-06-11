@@ -12,12 +12,12 @@ import org.bson.Document;
 
 public class DBcon {
 
-    private MongoClient client = null;
-    private MongoDatabase db;
     private MongoCollection<Document> coll;
     private final Model model;
-    ChavesImplements ci = null;
-    List<String> tec;
+    private ChavesImplements ci = null;
+    private final List<String> tec;
+    private MongoClient client = null;
+    private MongoDatabase db;
 
     //Método construtor
     public DBcon() {
@@ -25,8 +25,7 @@ public class DBcon {
         ci = new ChavesImplements();
         tec = new ArrayList<>();
     }
-
-    //Método de conexão com banco
+    
     public void Connect() {
         client = new MongoClient("localhost", 27017);
 
@@ -38,7 +37,7 @@ public class DBcon {
             JOptionPane.showMessageDialog(null, "Problemas com a conexão");
         }
     }
-
+    
     //Método de inserção de dados
     public void InsertOneDoc() {
         model.setIdValor(JOptionPane.showInputDialog("Informe o valor do id"));
@@ -75,7 +74,7 @@ public class DBcon {
         String valor = JOptionPane.showInputDialog("Valor : ");
 
         Document doc = new Document(chave, valor);
-        coll.find(doc).forEach(new Consumer<Document>() {
+       coll.find(doc).forEach(new Consumer<Document>() {
             @Override
             public void accept(Document doc) {
                 Document[] nomes = {doc};

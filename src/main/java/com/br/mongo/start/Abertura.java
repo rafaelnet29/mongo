@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 public class Abertura {
 
     private final DBcon db;
+    
     private int opc = 0;
 
     public Abertura() {
