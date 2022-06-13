@@ -40,11 +40,11 @@ public class DBcon {
     
     //Método de inserção de dados
     public void InsertOneDoc() {
-        model.setIdValor(JOptionPane.showInputDialog("Informe o valor do id"));
-        model.setNomeValor(JOptionPane.showInputDialog("Informe o valor do nome: "));
-        model.setIddValor(Integer.parseInt(JOptionPane.showInputDialog("Informe o valor da idade: ")));
-        model.setDescricaoValor(JOptionPane.showInputDialog("Informe o valor da descrição: "));
-        model.setTecnicasValor(JOptionPane.showInputDialog("Informe o valor da tecnicas: "));
+        model.setIdValor(JOptionPane.showInputDialog("Informe o do id"));
+        model.setNomeValor(JOptionPane.showInputDialog("Informe o nome: "));
+        model.setIddValor(Integer.parseInt(JOptionPane.showInputDialog("Informe a idade: ")));
+        model.setDescricaoValor(JOptionPane.showInputDialog("Informe a descrição: "));
+        model.setTecnicasValor(JOptionPane.showInputDialog("Informe as técnicas: "));
         aux();
 
         //Preparando Document
@@ -96,7 +96,8 @@ public class DBcon {
         String valor = JOptionPane.showInputDialog("Valor : ");
 
         Document doc2 = new Document(chave, valor);
-
+        
+        //Faz alusão a db.<collection>.updateOne({filtro},{operador : dado substituto})
         coll.updateOne(new Document(doc), new Document("$set", new Document(doc2)));
         JOptionPane.showMessageDialog(null, "Document atualizado com sucesso!");
         FindAll();
