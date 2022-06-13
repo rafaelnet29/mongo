@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import javax.swing.JOptionPane;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 
 public class DBcon {
 
@@ -25,7 +26,7 @@ public class DBcon {
         ci = new ChavesImplements();
         tec = new ArrayList<>();
     }
-    
+
     public void Connect() {
         client = new MongoClient("localhost", 27017);
 
@@ -37,7 +38,7 @@ public class DBcon {
             JOptionPane.showMessageDialog(null, "Problemas com a conexão");
         }
     }
-    
+
     //Método de inserção de dados
     public void InsertOneDoc() {
         model.setIdValor(JOptionPane.showInputDialog("Informe o do id"));
@@ -45,7 +46,7 @@ public class DBcon {
         model.setIddValor(Integer.parseInt(JOptionPane.showInputDialog("Informe a idade: ")));
         model.setDescricaoValor(JOptionPane.showInputDialog("Informe a descrição: "));
         model.setTecnicasValor(JOptionPane.showInputDialog("Informe as técnicas: "));
-        aux();
+        aux(model.getTecnicasValor());
 
         //Preparando Document
         Document doc = new Document();
@@ -74,7 +75,7 @@ public class DBcon {
         String valor = JOptionPane.showInputDialog("Valor : ");
 
         Document doc = new Document(chave, valor);
-       coll.find(doc).forEach(new Consumer<Document>() {
+        coll.find(doc).forEach(new Consumer<Document>() {
             @Override
             public void accept(Document doc) {
                 Document[] nomes = {doc};
@@ -87,26 +88,29 @@ public class DBcon {
     }
 
     /**
-     * Método para atualizar document
-     * apenas com o operador $set
-     */ 
+     * Método para atualizar document apenas com o operador $set
+     */
     public void updateOne() {
         Document doc = findOne();
+        
+        //informa aqui o que será atualizado
         String chave = JOptionPane.showInputDialog("Chave : ");
         String valor = JOptionPane.showInputDialog("Valor : ");
+        String operador = JOptionPane.showInputDialog("Qual operador :  $set ou $push ");
 
         Document doc2 = new Document(chave, valor);
-        
-        //Faz alusão a db.<collection>.updateOne({filtro},{operador : dado substituto})
-        coll.updateOne(new Document(doc), new Document("$set", new Document(doc2)));
+
+        //Faz alusão a db.<collection>.updateOne({filtro},{operador : {dado substituto}})
+        coll.updateOne(new Document(doc), new Document(operador, new Document(doc2)));
         JOptionPane.showMessageDialog(null, "Document atualizado com sucesso!");
+
         FindAll();
     }
 
     //Método para deletar Documents
     public void deleteOne() {
         Document doc = findOne();
-        int opc = JOptionPane.showConfirmDialog(null, "Tem certeza que quer deletar o Document? " 
+        int opc = JOptionPane.showConfirmDialog(null, "Tem certeza que quer deletar o Document? "
                 + doc, "Atenção !!", JOptionPane.YES_NO_CANCEL_OPTION);
 
         if (opc == 0) {
@@ -119,10 +123,10 @@ public class DBcon {
             JOptionPane.showMessageDialog(null, "Operação cancelada!");
         }
     }
-    
+
     //Método auxiliar para insertOne
-    public void aux() {
-        String[] texto = model.getTecnicasValor().split(",");
+    public void aux(String aux) {
+        String[] texto = aux.split(",");
         for (String tex : texto) {
             tec.add(tex);
         }
