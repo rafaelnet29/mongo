@@ -5,13 +5,10 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Consumer;
 import javax.swing.JOptionPane;
 import org.bson.Document;
-import org.bson.conversions.Bson;
 
 public class DBcon {
 
