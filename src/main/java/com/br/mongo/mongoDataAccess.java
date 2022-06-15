@@ -10,18 +10,18 @@ import java.util.function.Consumer;
 import javax.swing.JOptionPane;
 import org.bson.Document;
 
-public class DBcon {
+public class mongoDataAccess {
 
     private MongoCollection<Document> coll;
-    private final Model model;
+    private final mongoModel model;
     private ChavesImplements ci = null;
     private final List<String> tec;
     private MongoClient client = null;
     private MongoDatabase db;
 
     //Método construtor
-    public DBcon() {
-        model = new Model();
+    public mongoDataAccess() {
+        model = new mongoModel();
         ci = new ChavesImplements();
         tec = new ArrayList<String>();
     }

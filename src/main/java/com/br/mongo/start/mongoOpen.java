@@ -1,16 +1,16 @@
 package com.br.mongo.start;
 
-import com.br.mongo.DBcon;
+import com.br.mongo.mongoDataAccess;
 import javax.swing.JOptionPane;
 
-public class Abertura {
+public class mongoOpen {
 
-    private final DBcon db;
+    private final mongoDataAccess db;
     
     private int opc = 0;
 
-    public Abertura() {
-        db = new DBcon();
+    public mongoOpen() {
+        db = new mongoDataAccess();
         db.Connect();
     }
 

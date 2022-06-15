@@ -4,7 +4,7 @@
  */
 package com.br.mongo;
 
-public class Model {
+public class mongoModel {
 
     private String idValor;
     private String nomeValor;
@@ -12,7 +12,7 @@ public class Model {
     private String descricaoValor;
     private String tecnicasValor;
 
-    public Model() {
+    public mongoModel() {
     }
 
     public String getIdValor() {
