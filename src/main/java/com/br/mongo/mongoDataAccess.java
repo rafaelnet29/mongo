@@ -63,7 +63,10 @@ public class mongoDataAccess {
         coll.find().forEach(new Consumer<Document>() {
             @Override
             public void accept(Document docs) {
-                System.out.println("\n" + docs.toJson() + "\n");
+                Document[] nomes = {docs};
+                for (int i = 0; i < nomes.length; i++) {
+                    System.out.println(" Nomes: " + nomes[i].toJson().concat("\r"));
+                }
             }
         });
     }
@@ -78,7 +81,7 @@ public class mongoDataAccess {
             public void accept(Document doc) {
                 Document[] nomes = {doc};
                 for (int j = 0; j < nomes.length; j++) {
-                    System.out.println(nomes[j]);
+                    JOptionPane.showMessageDialog(null, nomes[j]);
                 }
             }
         });
@@ -86,7 +89,8 @@ public class mongoDataAccess {
     }
 
     /**
-     * Método para atualizar document apenas com o operador $set
+     * Método para atualizar document 
+     * com os operadores $set $push
      */
     public void updateOne() {
         Document doc = findOne();
@@ -98,8 +102,8 @@ public class mongoDataAccess {
         String operador = JOptionPane.showInputDialog("Qual operador :  $set ou $push");
 
         Document doc2 = new Document(chave, model.getTecnicasValor());
-            //Faz alusão a db.<collection>.updateOne({filtro},{operador : {dado substituto}})
-            coll.updateOne(new Document(doc), new Document(operador, new Document(doc2)));
+        //Faz alusão a db.<collection>.updateOne({filtro},{operador : {dado substituto}})
+        coll.updateOne(new Document(doc), new Document(operador, new Document(doc2)));
         JOptionPane.showMessageDialog(null, "Document atualizado com sucesso!");
 
         FindAll();
@@ -108,17 +112,21 @@ public class mongoDataAccess {
     //Método para deletar Documents
     public void deleteOne() {
         Document doc = findOne();
-        int opc = JOptionPane.showConfirmDialog(null, "Tem certeza que quer deletar o Document? "
-                + doc, "Atenção !!", JOptionPane.YES_NO_CANCEL_OPTION);
+        int opc = JOptionPane.showConfirmDialog(null, "Tem certeza que quer deletar o Document: "
+                + doc, " Atenção! ", JOptionPane.YES_NO_CANCEL_OPTION);
 
-        if (opc == 0) {
-            coll.deleteOne(doc);
-            JOptionPane.showMessageDialog(null, "Document deletado com Sucesso!");
-            FindAll();
-        } else if (opc == 1) {
-            JOptionPane.showMessageDialog(null, "Document não deletado!");
-        } else {
-            JOptionPane.showMessageDialog(null, "Operação cancelada!");
+        switch (opc) {
+            case 0:
+                coll.deleteOne(doc);
+                JOptionPane.showMessageDialog(null, " Document deletado com Sucesso! ");
+                FindAll();
+                break;
+            case 1:
+                JOptionPane.showMessageDialog(null, " Document não deletado! ");
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, " Operação cancelada! ");
+                break;
         }
     }
 
