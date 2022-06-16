@@ -65,7 +65,7 @@ public class mongoDataAccess {
             public void accept(Document docs) {
                 Document[] nomes = {docs};
                 for (int i = 0; i < nomes.length; i++) {
-                    System.out.println(" Nomes: " + nomes[i].toJson().concat("\r"));
+                   System.out.println( "Nomes: " + nomes[i]);
                 }
             }
         });
