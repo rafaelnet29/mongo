@@ -5,6 +5,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 import javax.swing.JOptionPane;
@@ -40,12 +41,13 @@ public class mongoDataAccess {
 
     //Método de inserção de dados
     public void InsertOneDoc() {
+
         model.setIdValor(JOptionPane.showInputDialog("Informe o do id"));
         model.setNomeValor(JOptionPane.showInputDialog("Informe o nome: "));
         model.setIddValor(Integer.parseInt(JOptionPane.showInputDialog("Informe a idade: ")));
         model.setDescricaoValor(JOptionPane.showInputDialog("Informe a descrição: "));
-        model.setTecnicasValor(JOptionPane.showInputDialog("Informe as técnicas: "));
-        aux(model.getTecnicasValor());
+        model.setTecnicasValor(JOptionPane.showInputDialog("Informe as técnicas: ").split(","));
+        tec.addAll(Arrays.asList(model.getTecnicasValor()));
 
         //Preparando Document
         Document doc = new Document();
@@ -65,7 +67,7 @@ public class mongoDataAccess {
             public void accept(Document docs) {
                 Document[] nomes = {docs};
                 for (int i = 0; i < nomes.length; i++) {
-                   System.out.println( "Nomes: " + nomes[i]);
+                    System.out.println("Nomes: " + nomes[i]);
                 }
             }
         });
@@ -89,8 +91,7 @@ public class mongoDataAccess {
     }
 
     /**
-     * Método para atualizar document 
-     * com os operadores $set $push
+     * Método para atualizar document com os operadores $set $push
      */
     public void updateOne() {
         Document doc = findOne();
@@ -98,10 +99,10 @@ public class mongoDataAccess {
         //informa aqui o que será atualizado
         String chave = JOptionPane.showInputDialog("Informe a Chave: ");
         String valor = JOptionPane.showInputDialog("Informe o Valor: ");
-        model.setTecnicasValor(valor);
+
         String operador = JOptionPane.showInputDialog("Qual operador :  $set ou $push");
 
-        Document doc2 = new Document(chave, model.getTecnicasValor());
+        Document doc2 = new Document(chave, valor);
         //Faz alusão a db.<collection>.updateOne({filtro},{operador : {dado substituto}})
         coll.updateOne(new Document(doc), new Document(operador, new Document(doc2)));
         JOptionPane.showMessageDialog(null, "Document atualizado com sucesso!");
@@ -128,14 +129,5 @@ public class mongoDataAccess {
                 JOptionPane.showMessageDialog(null, " Operação cancelada! ");
                 break;
         }
-    }
-
-    //Método auxiliar para insertOne
-    public List<String> aux(String aux) {
-        String[] texto = aux.split(",");
-        for (int i = 0; i < texto.length; i++) {
-            tec.add(texto[i]);
-        }
-        return tec;
     }
 }

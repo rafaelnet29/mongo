@@ -10,7 +10,7 @@ public class mongoModel {
     private String nomeValor;
     private int idadeValor;
     private String descricaoValor;
-    private String tecnicasValor;
+    private String[] tecnicasValor;
 
     public mongoModel() {
     }
@@ -47,12 +47,13 @@ public class mongoModel {
         this.descricaoValor = descricaoValor;
     }
 
-    public String getTecnicasValor() {
+    public String[] getTecnicasValor() {
         return tecnicasValor;
     }
 
-    public void setTecnicasValor(String tecnicasValor) {
+    public void setTecnicasValor(String[] tecnicasValor) {
         this.tecnicasValor = tecnicasValor;
     }
 
+    
 }
