@@ -14,9 +14,9 @@ import org.bson.Document;
 public class mongoDataAccess {
 
     private MongoCollection<Document> coll;
-    private final mongoModel model;
+    private mongoModel model = null;
     private ChavesImplements ci = null;
-    private final List<String> tec;
+    private List<String> tec = null;
     private MongoClient client = null;
     private MongoDatabase db;
 
