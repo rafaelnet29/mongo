@@ -46,7 +46,7 @@ public class mongoDataAccess {
         model.setNomeValor(JOptionPane.showInputDialog("Informe o nome: "));
         model.setIddValor(Integer.parseInt(JOptionPane.showInputDialog("Informe a idade: ")));
         model.setDescricaoValor(JOptionPane.showInputDialog("Informe a descrição: "));
-        model.setTecnicasValor(JOptionPane.showInputDialog("Informe as técnicas: ").split(","));
+        model.setTecnicasValor(JOptionPane.showInputDialog("Informe as habilidades: ").split(","));
         tec.addAll(Arrays.asList(model.getTecnicasValor()));
 
         //Preparando Document
@@ -67,7 +67,7 @@ public class mongoDataAccess {
             public void accept(Document docs) {
                 Document[] nomes = {docs};
                 for (int i = 0; i < nomes.length; i++) {
-                    System.out.println("Nomes: " + nomes[i]);
+                    System.out.println("Nomes: " + nomes[i] + "\n");
                 }
             }
         });
