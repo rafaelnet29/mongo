@@ -24,7 +24,7 @@ public class mongoDataAccess {
     public mongoDataAccess() {
         model = new mongoModel();
         ci = new ChavesImplements();
-        tec = new ArrayList<String>();
+        tec = new ArrayList<>();
     }
 
     public void Connect() {
