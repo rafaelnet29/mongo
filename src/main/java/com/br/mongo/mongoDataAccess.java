@@ -90,9 +90,7 @@ public class mongoDataAccess {
         return doc;
     }
 
-    /**
-     * Método para atualizar document com os operadores $set $push
-     */
+    //Método para atualizar document com os operadores $set $push
     public void updateOne() {
         Document doc = findOne();
 
