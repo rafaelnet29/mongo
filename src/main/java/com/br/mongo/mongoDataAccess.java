@@ -53,8 +53,7 @@ public class mongoDataAccess {
         Document doc = new Document();
         //inserindo dados no Document
         doc.append(ci.Id(), model.getIdValor()).append(ci.Nome(), model.getNomeValor())
-                .append(ci.Idade(), model.getIddValor())
-                .append(ci.Descricao(), model.getDescricaoValor())
+                .append(ci.Idade(), model.getIddValor()).append(ci.Descricao(), model.getDescricaoValor())
                 .append(ci.Tecnicas(), tec);
         coll.insertOne(doc);
         JOptionPane.showMessageDialog(null, " Dados insiridos com sucesso ");
@@ -77,7 +76,9 @@ public class mongoDataAccess {
     public Document findOne() {
         String chave = JOptionPane.showInputDialog("Informe a Chave : ");
         String valor = JOptionPane.showInputDialog("Informe o Valor : ");
+
         Document doc = new Document(chave, valor);
+
         coll.find(doc).forEach(new Consumer<Document>() {
             @Override
             public void accept(Document doc) {
