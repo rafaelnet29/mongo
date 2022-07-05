@@ -23,12 +23,15 @@ public class mongoDataAccess {
     private List<String> tec = null;
     private MongoClient client = null;
     private MongoDatabase db;
+    private ObjectMapper pretty;
 
     //Método construtor
     public mongoDataAccess() {
         model = new mongoModel();
         ci = new ChavesImplements();
         tec = new ArrayList<>();
+        pretty = new ObjectMapper();
+
     }
 
     public void Connect() {
@@ -64,7 +67,6 @@ public class mongoDataAccess {
 
     //Método para listar os Documents
     public void FindAll() {
-        ObjectMapper pretty = new ObjectMapper();
         coll.find().forEach(new Consumer<Document>() {
             @Override
             public void accept(Document docs) {
@@ -83,7 +85,7 @@ public class mongoDataAccess {
 
     //Método para busca de um único document
     public Document findOne() {
-        ObjectMapper pretty = new ObjectMapper();
+       
         String chave = JOptionPane.showInputDialog("Informe a Chave : ");
         String valor = JOptionPane.showInputDialog("Informe o Valor : ");
 
