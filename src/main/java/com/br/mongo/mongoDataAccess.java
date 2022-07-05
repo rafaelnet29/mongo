@@ -4,12 +4,18 @@ import com.br.interfaces.ChavesImplements;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.bson.Document;
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 
 public class mongoDataAccess {
 
@@ -61,12 +67,18 @@ public class mongoDataAccess {
 
     //Método para listar os Documents
     public void FindAll() {
+        ObjectMapper pretty = new ObjectMapper();
         coll.find().forEach(new Consumer<Document>() {
             @Override
             public void accept(Document docs) {
                 Document[] nomes = {docs};
                 for (int i = 0; i < nomes.length; i++) {
-                    System.out.println("Nomes: " + nomes[i] + "\n");
+                    try {
+                        String json = pretty.writerWithDefaultPrettyPrinter().writeValueAsString(nomes[i]);
+                        System.out.println("Nome: " + json + "\n");
+                    } catch (IOException ex) {
+                        Logger.getLogger(mongoDataAccess.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         });
@@ -74,6 +86,7 @@ public class mongoDataAccess {
 
     //Método para busca de um único document
     public Document findOne() {
+        ObjectMapper pretty = new ObjectMapper();
         String chave = JOptionPane.showInputDialog("Informe a Chave : ");
         String valor = JOptionPane.showInputDialog("Informe o Valor : ");
 
@@ -83,8 +96,13 @@ public class mongoDataAccess {
             @Override
             public void accept(Document doc) {
                 Document[] nomes = {doc};
-                for (int j = 0; j < nomes.length; j++) {
-                    JOptionPane.showMessageDialog(null, nomes[j]);
+                for (int i = 0; i < nomes.length; i++) {
+                    try {
+                        String json = pretty.writerWithDefaultPrettyPrinter().writeValueAsString(nomes[i]);
+                        System.out.println("Nome: " + json + "\n");
+                    } catch (IOException ex) {
+                        Logger.getLogger(mongoDataAccess.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         });
