@@ -13,8 +13,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.bson.Document;
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
 public class mongoDataAccess {
@@ -35,7 +33,6 @@ public class mongoDataAccess {
 
     public void Connect() {
         client = new MongoClient("localhost", 27017);
-
         if (client != null) {
             db = client.getDatabase("banco");
             coll = db.getCollection("nomes");
