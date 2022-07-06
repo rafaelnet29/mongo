@@ -74,7 +74,7 @@ public class mongoDataAccess {
                 for (int i = 0; i < nomes.length; i++) {
                     try {
                         String json = pretty.writerWithDefaultPrettyPrinter().writeValueAsString(nomes[i]);
-                        System.out.println("Nome: " + json + "\n");
+                        JOptionPane.showMessageDialog(null, "Nome: " + json + "\n");
                     } catch (IOException ex) {
                         Logger.getLogger(mongoDataAccess.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -86,7 +86,7 @@ public class mongoDataAccess {
     //Método para busca de um único document
     public Document findOne() {
        
-        String chave = JOptionPane.showInputDialog("Informe a Chave : ");
+        String chave = JOptionPane.showInputDialog("Informe qual a Chave : ");
         String valor = JOptionPane.showInputDialog("Informe o Valor : ");
 
         Document doc = new Document(chave, valor);
@@ -98,7 +98,7 @@ public class mongoDataAccess {
                 for (int i = 0; i < nomes.length; i++) {
                     try {
                         String json = pretty.writerWithDefaultPrettyPrinter().writeValueAsString(nomes[i]);
-                        System.out.println("Nome: " + json + "\n");
+                        JOptionPane.showMessageDialog(null, "Nome: " + json + "\n");
                     } catch (IOException ex) {
                         Logger.getLogger(mongoDataAccess.class.getName()).log(Level.SEVERE, null, ex);
                     }
