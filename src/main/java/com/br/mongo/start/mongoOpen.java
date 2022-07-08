@@ -5,27 +5,22 @@ import javax.swing.JOptionPane;
 
 public class mongoOpen {
 
-    private final mongoDataAccess db;
-    
-    private int opc = 0;
-
-    public mongoOpen() {
-        db = new mongoDataAccess();
+    public static void main(String[] args) {
+        mongoDataAccess db = new mongoDataAccess();
         db.Connect();
-    }
-
-    /**
-     * Mostra o menu inicial chamando todos os métodos para iniciar a aplicação
-     */
-    public void Start() {
-
+        int opc = 0;
+        
+        /**
+         * Mostra o menu inicial chamando todos os métodos para iniciar a
+         * aplicação
+         */
         try {
             do {
                 opc = Integer.parseInt(JOptionPane.showInputDialog(null, " --> Escolha uma opção:"
                         + " <-- \n"
-                        + "1 - Inserir " + " | " + "2 - Listar\n"
-                        + "3 - Buscar "  + " | " + " 4 - Atualiza\n"
-                        + "5 - Deletar " + " | " + " 0 - Sair ", " Menu ", 1));
+                        + "1 - Inserir " +  "  |  " + " 2 - Listar\n"
+                        + "3 - Buscar  " +  "  |  " + " 4 - Atualiza\n"
+                        + "5 - Deletar " +  "  |  " + " 0 - Sair ", " Menu ", 1));
 
                 if (opc == 1) {
                     db.InsertOneDoc();
@@ -35,15 +30,14 @@ public class mongoOpen {
                     db.findOne();
                 } else if (opc == 4) {
                     db.updateOne();
-                }else if(opc == 5){
+                } else if (opc == 5) {
                     db.deleteOne();
-                }else {
+                } else {
                     JOptionPane.showMessageDialog(null, " Até mais!");
                 }
             } while (opc != 0);
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Formato invalido de opção ", "Opções entre 0 e 5 " , 1);
-            Start();
+            JOptionPane.showMessageDialog(null, "Formato invalido de opção ", "Opções entre 0 e 5 ", 1);
         }
-    }
-}
+    }//main
+}//class
