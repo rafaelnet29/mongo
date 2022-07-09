@@ -74,7 +74,7 @@ public class mongoDataAccess {
                 for (int i = 0; i < nomes.length; i++) {
                     try {
                         String json = pretty.writerWithDefaultPrettyPrinter().writeValueAsString(nomes[i]);
-                        JOptionPane.showMessageDialog(null, "Nome: " + json + "\n");
+                        JOptionPane.showMessageDialog(null, "Document: " + json + "\n");
                     } catch (IOException ex) {
                         Logger.getLogger(mongoDataAccess.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -98,7 +98,7 @@ public class mongoDataAccess {
                 for (int i = 0; i < nomes.length; i++) {
                     try {
                         String json = pretty.writerWithDefaultPrettyPrinter().writeValueAsString(nomes[i]);
-                        JOptionPane.showMessageDialog(null, "Nome: " + json + "\n");
+                        JOptionPane.showMessageDialog(null, "Document: " + json + "\n");
                     } catch (IOException ex) {
                         Logger.getLogger(mongoDataAccess.class.getName()).log(Level.SEVERE, null, ex);
                     }
