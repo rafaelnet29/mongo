@@ -37,7 +37,7 @@ public class mongoDataAccess {
     public void Connect() {
         client = new MongoClient("localhost", 27017);
         if (client != null) {
-            db = client.getDatabase("banco");
+            db = client.getDatabase("personagens");
             coll = db.getCollection("nomes");
             JOptionPane.showMessageDialog(null, "Conectado com sucesso !");
         } else {
