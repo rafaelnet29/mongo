@@ -23,7 +23,7 @@ public class mongoDataAccess {
     private List<String> tec = null;
     private MongoClient client = null;
     private MongoDatabase db;
-    private ObjectMapper pretty;
+    private final ObjectMapper pretty;
 
     //Método construtor
     public mongoDataAccess() {
@@ -62,7 +62,7 @@ public class mongoDataAccess {
                 .append(ci.Idade(), model.getIddValor()).append(ci.Descricao(), model.getDescricaoValor())
                 .append(ci.Tecnicas(), tec);
         coll.insertOne(doc);
-        JOptionPane.showMessageDialog(null, " Dados insiridos com sucesso ");
+        JOptionPane.showMessageDialog(null, " Document insirido com sucesso ");
     }
 
     //Método para listar os Documents
@@ -74,7 +74,8 @@ public class mongoDataAccess {
                 for (int i = 0; i < nomes.length; i++) {
                     try {
                         String json = pretty.writerWithDefaultPrettyPrinter().writeValueAsString(nomes[i]);
-                        System.out.println("Document: " + json + "\n");
+                        System.out.println( " Document: " + json);
+                        System.out.println( " \n " );
                     } catch (IOException ex) {
                         Logger.getLogger(mongoDataAccess.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -85,7 +86,7 @@ public class mongoDataAccess {
 
     //Método para busca de um único document
     public Document findOne() {
-       
+
         String chave = JOptionPane.showInputDialog("Informe qual a Chave : ");
         String valor = JOptionPane.showInputDialog("Informe o Valor : ");
 
@@ -98,7 +99,7 @@ public class mongoDataAccess {
                 for (int i = 0; i < nomes.length; i++) {
                     try {
                         String json = pretty.writerWithDefaultPrettyPrinter().writeValueAsString(nomes[i]);
-                        JOptionPane.showMessageDialog(null, "Document: " + json + "\n");
+                        System.out.println( "Document: " + json + "\n");
                     } catch (IOException ex) {
                         Logger.getLogger(mongoDataAccess.class.getName()).log(Level.SEVERE, null, ex);
                     }
