@@ -47,21 +47,7 @@ public class mongoDataAccess {
 
     //Método de inserção de dados
     public void InsertOneDoc() {
-
-        model.setIdValor(JOptionPane.showInputDialog("Informe o do id"));
-        model.setNomeValor(JOptionPane.showInputDialog("Informe o nome: "));
-        model.setIddValor(Integer.parseInt(JOptionPane.showInputDialog("Informe a idade: ")));
-        model.setDescricaoValor(JOptionPane.showInputDialog("Informe a descrição: "));
-        model.setTecnicasValor(JOptionPane.showInputDialog("Informe as habilidades: ").split(","));
-        tec.addAll(Arrays.asList(model.getTecnicasValor()));
-
-        //Preparando Document
-        Document doc = new Document();
-        //inserindo dados no Document
-        doc.append(ci.Id(), model.getIdValor()).append(ci.Nome(), model.getNomeValor())
-                .append(ci.Idade(), model.getIddValor()).append(ci.Descricao(), model.getDescricaoValor())
-                .append(ci.Tecnicas(), tec);
-        coll.insertOne(doc);
+        coll.insertOne(new mongoDataAccessAux().insertAux());
         JOptionPane.showMessageDialog(null, " Document insirido com sucesso ");
     }
 

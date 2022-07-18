@@ -9,7 +9,7 @@ public class mongoOpen {
         mongoDataAccess db = new mongoDataAccess();
         db.Connect();
         int opc = 0;
-        
+
         /**
          * Mostra o menu inicial chamando todos os métodos para iniciar a
          * aplicação
@@ -18,9 +18,12 @@ public class mongoOpen {
             do {
                 opc = Integer.parseInt(JOptionPane.showInputDialog(null, " --> Escolha uma opção:"
                         + " <-- \n"
-                        + "1 - Inserir " +  "  |  " + " 2 - Listar\n"
-                        + "3 - Buscar  " +  "  |  " + " 4 - Atualiza\n"
-                        + "5 - Deletar " +  "  |  " + " 0 - Sair ", " Menu ", 1));
+                        + "1 - Inserir Único\n"
+                        + "2 - Listar Vários\n"
+                        + "3 - Buscar\n"
+                        + "4 - Atualizar\n"
+                        + "5 - Deletar\n"
+                        + "0 - Sair" , " Menu ", 1));
 
                 if (opc == 1) {
                     db.InsertOneDoc();
