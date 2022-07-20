@@ -50,6 +50,10 @@ public class mongoDataAccess {
         coll.insertOne(new mongoDataAccessAux().insertAux());
         JOptionPane.showMessageDialog(null, " Document insirido com sucesso ");
     }
+    //em desenvolvimento
+    public void InsertMany(){
+        coll.insertMany((List<? extends Document>) new mongoDataAccessAux().insertManyAux());
+    }
 
     //Método para listar os Documents
     public void FindAll() {
