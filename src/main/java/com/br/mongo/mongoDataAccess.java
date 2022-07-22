@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,18 +19,15 @@ import org.codehaus.jackson.map.ObjectMapper;
 public class mongoDataAccess {
 
     private MongoCollection<Document> coll;
-    private mongoModel model = null;
-    private ChavesImplements ci = null;
-    private List<String> tec = null;
     private MongoClient client = null;
     private MongoDatabase db;
     private final ObjectMapper pretty;
 
     //Método construtor
     public mongoDataAccess() {
-        model = new mongoModel();
-        ci = new ChavesImplements();
-        tec = new ArrayList<>();
+        new mongoModel();
+        new ChavesImplements();
+        new ArrayList<>();
         pretty = new ObjectMapper();
 
     }
@@ -52,7 +50,7 @@ public class mongoDataAccess {
     }
     //em desenvolvimento
     public void InsertMany(){
-        coll.insertMany((List<? extends Document>) new mongoDataAccessAux().insertManyAux());
+        coll.insertMany(Arrays.asList(new Document(new mongoDataAccessAux().insertAux())));
     }
 
     //Método para listar os Documents

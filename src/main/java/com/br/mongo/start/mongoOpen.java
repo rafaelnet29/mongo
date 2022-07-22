@@ -26,12 +26,7 @@ public class mongoOpen {
                         + "0 - Sair", " Menu ", 1));
 
                 if (opc == 1) {
-                    op = JOptionPane.showInputDialog(null, " --> Escolha uma opção: A - insertOne | B - insertMany").charAt(0);
-                    if (op == 'A') {
-                        db.InsertOneDoc();
-                    }else{
-                        db.InsertMany();
-                    }
+                    db.InsertOneDoc();
                 } else if (opc == 2) {
                     db.FindAll();
                 } else if (opc == 3) {
@@ -40,6 +35,8 @@ public class mongoOpen {
                     db.updateOne();
                 } else if (opc == 5) {
                     db.deleteOne();
+                }else if(opc == 6){
+                    db.InsertMany();
                 } else {
                     JOptionPane.showMessageDialog(null, " Até mais!");
                 }

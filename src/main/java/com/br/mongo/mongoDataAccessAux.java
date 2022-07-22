@@ -41,9 +41,8 @@ public class mongoDataAccessAux {
     }
     
     //em desenvolvimento
-    public Document insertManyAux() {
+    public List<Document> insertManyAux() {
         int opc = 0;
-        Document doc1 = null;
         do {
             
             model.setIdValor(JOptionPane.showInputDialog("Informe o do id"));
@@ -56,13 +55,15 @@ public class mongoDataAccessAux {
             doc.append(ci.Id(), model.getIdValor()).append(ci.Nome(), model.getNomeValor())
                     .append(ci.Idade(), model.getIddValor()).append(ci.Descricao(), model.getDescricaoValor())
                     .append(ci.Tecnicas(), tec);
-            list.add(doc);
-            opc = Integer.parseInt(JOptionPane.showInputDialog("Quer adicionar mais um Documet? 1 - Sim, 0 - Não "));
+            
+             opc = Integer.parseInt(JOptionPane.showInputDialog(null, "Continuar a adicionar: "));
+             
         } while (opc != 0);
-        Document[] docs = {(Document)list};
-        for (int i = 0; i < docs.length; i++) {
-            doc1 = docs[i];
+        Document[] docx = {doc};
+        for (int i = 0; i < docx.length; i++) {
+            list.addAll(Arrays.asList(docx[i]));
         }
-        return doc1;
+       
+        return list;
     }
 }
