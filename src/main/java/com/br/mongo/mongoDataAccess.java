@@ -12,7 +12,10 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import org.bson.Document;
 import org.codehaus.jackson.map.ObjectMapper;
 
@@ -22,12 +25,14 @@ public class mongoDataAccess {
     private MongoClient client = null;
     private MongoDatabase db;
     private final ObjectMapper pretty;
+    private ChavesImplements ci;
+    private List<Document> list;
 
     //Método construtor
     public mongoDataAccess() {
-        new mongoModel();
-        new ChavesImplements();
-        new ArrayList<>();
+        //new mongoModel();
+        ci = new ChavesImplements();
+        list = new ArrayList<>();
         pretty = new ObjectMapper();
 
     }
@@ -48,9 +53,23 @@ public class mongoDataAccess {
         coll.insertOne(new mongoDataAccessAux().insertAux());
         JOptionPane.showMessageDialog(null, " Document insirido com sucesso ");
     }
+
     //em desenvolvimento
-    public void InsertMany(){
-        coll.insertMany(Arrays.asList(new Document(new mongoDataAccessAux().insertAux())));
+    public void InsertMany() {
+        var texto  = "";
+        int j = 0;
+        String[] json = texto.split("\\|");
+        Document doc = new Document();
+        doc.append(ci.Id(), json[j]).append(ci.Nome(), json[j]).append(ci.Idade(), Integer.parseInt(json[j]))
+                .append(ci.Descricao(), json[j]).append(ci.Tecnicas(), json[j].split(","));
+        
+        
+        for (int i = 0; i < json.length; i++) {
+            list.add(doc);
+        }
+        
+        coll.insertMany(list);
+        //new mongoDataAccessAux().insertManyAux();
     }
 
     //Método para listar os Documents
@@ -62,8 +81,8 @@ public class mongoDataAccess {
                 for (int i = 0; i < nomes.length; i++) {
                     try {
                         String json = pretty.writerWithDefaultPrettyPrinter().writeValueAsString(nomes[i]);
-                        System.out.println( " Document: " + json);
-                        System.out.println( " \n " );
+                        System.out.println(" Document: " + json);
+                        System.out.println(" \n ");
                     } catch (IOException ex) {
                         Logger.getLogger(mongoDataAccess.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -87,7 +106,7 @@ public class mongoDataAccess {
                 for (int i = 0; i < nomes.length; i++) {
                     try {
                         String json = pretty.writerWithDefaultPrettyPrinter().writeValueAsString(nomes[i]);
-                        System.out.println( "Document: " + json + "\n");
+                        System.out.println("Document: " + json + "\n");
                     } catch (IOException ex) {
                         Logger.getLogger(mongoDataAccess.class.getName()).log(Level.SEVERE, null, ex);
                     }
