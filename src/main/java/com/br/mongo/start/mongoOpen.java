@@ -23,10 +23,11 @@ public class mongoOpen {
                         + "3 - Buscar\n"
                         + "4 - Atualizar\n"
                         + "5 - Deletar\n"
+                        + "6 - Inserir Vários\n"
                         + "0 - Sair", " Menu ", 1));
 
                 if (opc == 1) {
-                    db.InsertOneDoc();
+                    db.InsertOne();
                 } else if (opc == 2) {
                     db.FindAll();
                 } else if (opc == 3) {

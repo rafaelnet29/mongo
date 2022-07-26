@@ -1,40 +1,29 @@
 package com.br.mongo;
 
-import com.br.interfaces.ChavesImplements;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import org.bson.Document;
 import org.codehaus.jackson.map.ObjectMapper;
+
 
 public class mongoDataAccess {
 
     private MongoCollection<Document> coll;
     private MongoClient client = null;
     private MongoDatabase db;
-    private final ObjectMapper pretty;
-    private ChavesImplements ci;
-    private List<Document> list;
+    private Document doc = null;
+    private ObjectMapper pretty = null;
 
     //Método construtor
     public mongoDataAccess() {
-        //new mongoModel();
-        ci = new ChavesImplements();
-        list = new ArrayList<>();
-        pretty = new ObjectMapper();
-
+        this.doc = doc;
+        this.pretty = new ObjectMapper();
     }
 
     public void Connect() {
@@ -49,27 +38,14 @@ public class mongoDataAccess {
     }
 
     //Método de inserção de dados
-    public void InsertOneDoc() {
-        coll.insertOne(new mongoDataAccessAux().insertAux());
+    public void InsertOne() {
+        coll.insertOne(new mongoDataAccessAux().insertOneAux());
         JOptionPane.showMessageDialog(null, " Document insirido com sucesso ");
     }
 
     //em desenvolvimento
     public void InsertMany() {
-        var texto  = "";
-        int j = 0;
-        String[] json = texto.split("\\|");
-        Document doc = new Document();
-        doc.append(ci.Id(), json[j]).append(ci.Nome(), json[j]).append(ci.Idade(), Integer.parseInt(json[j]))
-                .append(ci.Descricao(), json[j]).append(ci.Tecnicas(), json[j].split(","));
-        
-        
-        for (int i = 0; i < json.length; i++) {
-            list.add(doc);
-        }
-        
-        coll.insertMany(list);
-        //new mongoDataAccessAux().insertManyAux();
+       new mongoDataAccessAux().insertManyAux();
     }
 
     //Método para listar os Documents
@@ -97,16 +73,16 @@ public class mongoDataAccess {
         String chave = JOptionPane.showInputDialog("Informe qual a Chave : ");
         String valor = JOptionPane.showInputDialog("Informe o Valor : ");
 
-        Document doc = new Document(chave, valor);
-
+        doc = new Document(chave, valor);
         coll.find(doc).forEach(new Consumer<Document>() {
             @Override
-            public void accept(Document doc) {
-                Document[] nomes = {doc};
+            public void accept(Document docs) {
+                Document[] nomes = {docs};
                 for (int i = 0; i < nomes.length; i++) {
                     try {
                         String json = pretty.writerWithDefaultPrettyPrinter().writeValueAsString(nomes[i]);
-                        System.out.println("Document: " + json + "\n");
+                        System.out.println(" Document: " + json);
+                        System.out.println(" \n ");
                     } catch (IOException ex) {
                         Logger.getLogger(mongoDataAccess.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -118,9 +94,12 @@ public class mongoDataAccess {
 
     //Método para atualizar document com os operadores $set $push
     public void updateOne() {
-        Document doc = findOne();
+        doc = findOne();
 
-        //informa aqui o que será atualizado
+        /**
+         * informa aqui o que a com qual chave
+         * o Document será atualizado
+         */
         String chave = JOptionPane.showInputDialog("Informe a Chave: ");
         String valor = JOptionPane.showInputDialog("Informe o Valor: ");
 
@@ -136,7 +115,7 @@ public class mongoDataAccess {
 
     //Método para deletar Documents
     public void deleteOne() {
-        Document doc = findOne();
+        doc = findOne();
         int opc = JOptionPane.showConfirmDialog(null, "Tem certeza que quer deletar o Document: "
                 + doc, " Atenção! ", JOptionPane.YES_NO_CANCEL_OPTION);
 
