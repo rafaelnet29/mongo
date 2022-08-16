@@ -46,6 +46,7 @@ public class mongoDataAccessAux {
         doc.append(ci.Id(), model.getIdValor()).append(ci.Nome(), model.getNomeValor())
                 .append(ci.Idade(), model.getIddValor()).append(ci.Descricao(), model.getDescricaoValor())
                 .append(ci.Tecnicas(), tec);
+         JOptionPane.showMessageDialog(null, " Document insirido com sucesso ");
         return doc;
     }
     //Inserir vários Documents
@@ -60,6 +61,7 @@ public class mongoDataAccessAux {
             op = Integer.parseInt(JOptionPane.showInputDialog("Continuar: 1-Sim, 0-Não"));
         }while(op != 0 );
         coll.insertMany(list);
+         JOptionPane.showMessageDialog(null, " Documents insiridos com sucesso ");
         return doc;
     }
     

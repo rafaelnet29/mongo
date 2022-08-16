@@ -40,12 +40,13 @@ public class mongoDataAccess {
     //Método de inserção de um único Document
     public void InsertOne() {
         coll.insertOne(new mongoDataAccessAux().insertOneAux());
-        JOptionPane.showMessageDialog(null, " Document insirido com sucesso ");
+       
     }
 
     //Método de insersão de varios Documents
     public void InsertMany() {
        new mongoDataAccessAux().insertManyAux();
+       
     }
 
     //Método para listar os Documents
