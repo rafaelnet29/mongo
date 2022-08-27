@@ -64,21 +64,4 @@ public class mongoDataAccessAux {
          JOptionPane.showMessageDialog(null, " Documents insiridos com sucesso ");
         return doc;
     }
-    
-    public void aux() {
-        coll.find().forEach(new Consumer<Document>() {
-            @Override
-            public void accept(Document d) {
-                Document[] nomes = {doc};
-                for (int i = 0; i < nomes.length; i++) {
-                    try {
-                        String json = pretty.writerWithDefaultPrettyPrinter().writeValueAsString(nomes[i]);
-                        System.out.println("Document: " + json + "\n");
-                    } catch (IOException ex) {
-                        Logger.getLogger(mongoDataAccess.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            }
-        });
-    }
 }

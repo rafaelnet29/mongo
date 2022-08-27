@@ -4,13 +4,16 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.bson.Document;
 import org.codehaus.jackson.map.ObjectMapper;
-
 
 public class mongoDataAccess {
 
@@ -40,13 +43,11 @@ public class mongoDataAccess {
     //Método de inserção de um único Document
     public void InsertOne() {
         coll.insertOne(new mongoDataAccessAux().insertOneAux());
-       
     }
 
     //Método de insersão de varios Documents
     public void InsertMany() {
-       new mongoDataAccessAux().insertManyAux();
-       
+        new mongoDataAccessAux().insertManyAux();
     }
 
     //Método para listar os Documents
@@ -94,23 +95,27 @@ public class mongoDataAccess {
 
     //Método para atualizar document com os operadores $set $push
     public void updateOne() {
-        doc = findOne();
+        try {
+            doc = findOne();
 
-        /**
-         * informa aqui o que a com qual chave
-         * o Document será atualizado
-         */
-        String chave = JOptionPane.showInputDialog("Informe a Chave: ");
-        String valor = JOptionPane.showInputDialog("Informe o Valor: ");
+            /**
+             * informa aqui com qual chave o Document será atualizado
+             */
+            String chave = JOptionPane.showInputDialog("Informe a Chave: ");
+            String valor = JOptionPane.showInputDialog("Informe o Valor: ");
 
-        String operador = JOptionPane.showInputDialog("Qual operador :  $set ou $push");
+            //Document doc2 = new Document(chave, valor);
+          
 
-        Document doc2 = new Document(chave, valor);
-        //Faz alusão a db.<collection>.updateOne({filtro},{operador : {dado substituto}})
-        coll.updateOne(new Document(doc), new Document(operador, new Document(doc2)));
-        JOptionPane.showMessageDialog(null, "Document atualizado com sucesso!");
+            String operador = JOptionPane.showInputDialog("informe o operador :  $set");
+            //Faz alusão a db.<collection>.updateOne({filtro},{operador : {dado substituto}})
+            coll.updateOne(new Document(doc), new Document(operador, new Document(new Document(chave, Arrays.asList(valor)))));
+            JOptionPane.showMessageDialog(null, "Document atualizado com sucesso!");
 
-        FindAll();
+            FindAll();
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(null, "Argumento inserido errado", "Atenção", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     //Método para deletar Documents
