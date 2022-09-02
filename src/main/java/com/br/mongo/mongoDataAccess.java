@@ -4,10 +4,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -103,10 +100,7 @@ public class mongoDataAccess {
              */
             String chave = JOptionPane.showInputDialog("Informe a Chave: ");
             String valor = JOptionPane.showInputDialog("Informe o Valor: ");
-
-            //Document doc2 = new Document(chave, valor);
-          
-
+            
             String operador = JOptionPane.showInputDialog("informe o operador :  $set");
             //Faz alusão a db.<collection>.updateOne({filtro},{operador : {dado substituto}})
             coll.updateOne(new Document(doc), new Document(operador, new Document(new Document(chave, Arrays.asList(valor)))));

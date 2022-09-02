@@ -2,7 +2,7 @@
 /Classe modelo com os 
 /métodos GET e SET 
  */
-package com.br.mongo;
+package com.br.mongo.model;
 
 public class mongoModel {
 
@@ -54,6 +54,4 @@ public class mongoModel {
     public void setTecnicasValor(String[] tecnicasValor) {
         this.tecnicasValor = tecnicasValor;
     }
-
-    
 }

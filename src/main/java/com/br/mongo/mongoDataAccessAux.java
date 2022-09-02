@@ -1,17 +1,13 @@
 package com.br.mongo;
 
+import com.br.mongo.model.mongoModel;
 import com.br.interfaces.ChavesImplements;
 import com.mongodb.client.MongoCollection;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.bson.Document;
-import org.codehaus.jackson.map.ObjectMapper;
 
 public class mongoDataAccessAux {
 
@@ -20,7 +16,6 @@ public class mongoDataAccessAux {
     private ChavesImplements ci = null;
     private List<Document> list = null;
     private Document doc = null;
-    private ObjectMapper pretty = null;
     private MongoCollection<Document> coll;
     
     //Método Construtor
@@ -30,7 +25,6 @@ public class mongoDataAccessAux {
         this.ci = new ChavesImplements();
         list = new ArrayList();
         this.doc = new Document();
-        this.pretty = new ObjectMapper();
     }
     
     public Document insertOneAux() {
