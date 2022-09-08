@@ -100,7 +100,7 @@ public class mongoDataAccess {
              */
             String chave = JOptionPane.showInputDialog("Informe a Chave: ");
             String valor = JOptionPane.showInputDialog("Informe o Valor: ");
-            
+
             String operador = JOptionPane.showInputDialog("informe o operador :  $set");
             //Faz alusão a db.<collection>.updateOne({filtro},{operador : {dado substituto}})
             coll.updateOne(new Document(doc), new Document(operador, new Document(new Document(chave, Arrays.asList(valor)))));

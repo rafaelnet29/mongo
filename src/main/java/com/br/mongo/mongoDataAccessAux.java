@@ -17,7 +17,7 @@ public class mongoDataAccessAux {
     private List<Document> list = null;
     private Document doc = null;
     private MongoCollection<Document> coll;
-    
+
     //Método Construtor
     public mongoDataAccessAux() {
         this.model = new mongoModel();
@@ -26,7 +26,7 @@ public class mongoDataAccessAux {
         list = new ArrayList();
         this.doc = new Document();
     }
-    
+
     public Document insertOneAux() {
 
         model.setIdValor(JOptionPane.showInputDialog("Informe o do id"));
@@ -40,22 +40,24 @@ public class mongoDataAccessAux {
         doc.append(ci.Id(), model.getIdValor()).append(ci.Nome(), model.getNomeValor())
                 .append(ci.Idade(), model.getIddValor()).append(ci.Descricao(), model.getDescricaoValor())
                 .append(ci.Tecnicas(), tec);
-         JOptionPane.showMessageDialog(null, " Document insirido com sucesso ");
+        JOptionPane.showMessageDialog(null, " Document insirido com sucesso ");
         return doc;
     }
+
     //Inserir vários Documents
-    public Document insertManyAux(){
+    public Document insertManyAux() {
+        @SuppressWarnings("UnusedAssignment")
         int op = 0;
         do {
             doc = insertOneAux();
-            Document []docx = {doc};
+            Document[] docx = {doc};
             for (int i = 0; i < docx.length; i++) {
                 list.add(docx[i]);
             }
             op = Integer.parseInt(JOptionPane.showInputDialog("Continuar: 1-Sim, 0-Não"));
-        }while(op != 0 );
+        } while (op != 0);
         coll.insertMany(list);
-         JOptionPane.showMessageDialog(null, " Documents insiridos com sucesso ");
+        JOptionPane.showMessageDialog(null, " Documents insiridos com sucesso ");
         return doc;
     }
 }

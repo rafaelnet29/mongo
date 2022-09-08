@@ -36,7 +36,7 @@ public class mongoOpen {
                     db.updateOne();
                 } else if (opc == 5) {
                     db.deleteOne();
-                }else if(opc == 6){
+                } else if (opc == 6) {
                     db.InsertMany();
                 } else {
                     JOptionPane.showMessageDialog(null, " Até mais!");

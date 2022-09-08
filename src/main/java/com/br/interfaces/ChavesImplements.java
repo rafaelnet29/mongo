@@ -1,10 +1,10 @@
 package com.br.interfaces;
 
-public class ChavesImplements implements InterfaceChaves{
+public class ChavesImplements implements InterfaceChaves {
 
     @Override
     public String Id() {
-       return "_id";
+        return "_id";
     }
 
     @Override
