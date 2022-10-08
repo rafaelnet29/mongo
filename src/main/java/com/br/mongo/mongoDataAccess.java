@@ -1,5 +1,6 @@
 package com.br.mongo;
 
+import com.br.mongo.model.mongoModel;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
@@ -19,11 +20,13 @@ public class mongoDataAccess {
     private MongoDatabase db;
     private Document doc = null;
     private ObjectMapper pretty = null;
+    private mongoModel model = null;
 
     //Método construtor
     public mongoDataAccess() {
-        this.doc = doc;
+        this.doc = new Document();
         this.pretty = new ObjectMapper();
+        this.model = new mongoModel();
     }
 
     public void Connect() {
@@ -101,9 +104,13 @@ public class mongoDataAccess {
             String chave = JOptionPane.showInputDialog("Informe a Chave: ");
             String valor = JOptionPane.showInputDialog("Informe o Valor: ");
 
-            String operador = JOptionPane.showInputDialog("informe o operador :  $set");
+            String operador = JOptionPane.showInputDialog("Informe o operador :  $set");
             //Faz alusão a db.<collection>.updateOne({filtro},{operador : {dado substituto}})
-            coll.updateOne(new Document(doc), new Document(operador, new Document(new Document(chave, Arrays.asList(valor)))));
+            if (!valor.equals("Tecnicas")) {
+                coll.updateOne(new Document(doc), new Document(operador, new Document(new Document(chave, valor))));
+            } else {
+                coll.updateOne(new Document(doc), new Document(operador, new Document(new Document(chave, Arrays.asList(valor)))));
+            }
             JOptionPane.showMessageDialog(null, "Document atualizado com sucesso!");
 
             FindAll();
@@ -111,8 +118,8 @@ public class mongoDataAccess {
             JOptionPane.showMessageDialog(null, "Argumento inserido errado", "Atenção", JOptionPane.ERROR_MESSAGE);
         }
     }
-
     //Método para deletar Documents
+
     public void deleteOne() {
         doc = findOne();
         int opc = JOptionPane.showConfirmDialog(null, "Tem certeza que quer deletar o Document: "
