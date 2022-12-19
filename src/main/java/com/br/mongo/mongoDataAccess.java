@@ -1,6 +1,5 @@
 package com.br.mongo;
 
-import com.br.mongo.model.mongoModel;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
@@ -20,13 +19,11 @@ public class mongoDataAccess {
     private MongoDatabase db;
     private Document doc = null;
     private ObjectMapper pretty = null;
-    private mongoModel model = null;
 
     //Método construtor
     public mongoDataAccess() {
         this.doc = new Document();
         this.pretty = new ObjectMapper();
-        this.model = new mongoModel();
     }
 
     public void Connect() {
