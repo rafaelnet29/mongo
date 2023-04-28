@@ -27,7 +27,7 @@ public class mongoOpen {
                         + "0 - Sair", " Menu ", 1));
 
                 if (opc == 1) {
-                    db.InsertOne();
+                    db.InsertOneAux();
                 } else if (opc == 2) {
                     db.FindAll();
                 } else if (opc == 3) {
@@ -37,7 +37,7 @@ public class mongoOpen {
                 } else if (opc == 5) {
                     db.deleteOne();
                 } else if (opc == 6) {
-                    db.InsertMany();
+                    db.InsertManyAux();
                 } else {
                     JOptionPane.showMessageDialog(null, " Até mais!");
                 }

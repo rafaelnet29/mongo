@@ -38,12 +38,12 @@ public class mongoDataAccess {
     }
 
     //Método de inserção de um único Document
-    public void InsertOne() {
+    public void InsertOneAux() {
         coll.insertOne(new mongoDataAccessAux().insertOneAux());
     }
 
     //Método de insersão de varios Documents
-    public void InsertMany() {
+    public void InsertManyAux() {
         new mongoDataAccessAux().insertManyAux();
     }
 
@@ -56,7 +56,7 @@ public class mongoDataAccess {
                 for (int i = 0; i < nomes.length; i++) {
                     try {
                         String json = pretty.writerWithDefaultPrettyPrinter().writeValueAsString(nomes[i]);
-                        System.out.println(" Document: \r\n" + json + " \n ");
+                        System.out.println( json + " \n ");
                     } catch (IOException ex) {
                         Logger.getLogger(mongoDataAccess.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -79,8 +79,7 @@ public class mongoDataAccess {
                 for (int i = 0; i < nomes.length; i++) {
                     try {
                         String json = pretty.writerWithDefaultPrettyPrinter().writeValueAsString(nomes[i]);
-                        System.out.println(" Document: " + json);
-                        System.out.println(" \n ");
+                        System.out.println( json + " \n ");
                     } catch (IOException ex) {
                         Logger.getLogger(mongoDataAccess.class.getName()).log(Level.SEVERE, null, ex);
                     }

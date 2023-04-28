@@ -29,18 +29,18 @@ public class mongoDataAccessAux {
 
     public Document insertOneAux() {
 
-        model.setIdValor(JOptionPane.showInputDialog("Informe o do id"));
+        model.setIdValor(JOptionPane.showInputDialog("Informe o id"));
         model.setNomeValor(JOptionPane.showInputDialog("Informe o nome: "));
         model.setIddValor(Integer.parseInt(JOptionPane.showInputDialog("Informe a idade: ")));
         model.setDescricaoValor(JOptionPane.showInputDialog("Informe a descrição: "));
-        model.setTecnicasValor(JOptionPane.showInputDialog("Informe as habilidades: ").split(","));
+        model.setTecnicasValor(JOptionPane.showInputDialog("Informe as habilidades " + "(sepere-as por vígula): ").split(","));
         tec.addAll(Arrays.asList(model.getTecnicasValor()));
 
         //inserindo dados no Document
         doc.append(ci.Id(), model.getIdValor()).append(ci.Nome(), model.getNomeValor())
                 .append(ci.Idade(), model.getIddValor()).append(ci.Descricao(), model.getDescricaoValor())
                 .append(ci.Tecnicas(), tec);
-        JOptionPane.showMessageDialog(null, " Document insirido com sucesso ");
+        JOptionPane.showMessageDialog(null, " Document inserido com sucesso ");
         return doc;
     }
 
