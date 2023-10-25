@@ -1,7 +1,7 @@
-package com.br.mongo;
+package com.br.mongo.data;
 
 import com.br.mongo.model.mongoModel;
-import com.br.interfaces.ChavesImplements;
+import com.br.mongo.interfaces.ChavesImplements;
 import com.mongodb.client.MongoCollection;
 import java.util.ArrayList;
 import java.util.Arrays;

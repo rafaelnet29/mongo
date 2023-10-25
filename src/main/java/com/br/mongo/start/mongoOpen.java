@@ -1,6 +1,6 @@
 package com.br.mongo.start;
 
-import com.br.mongo.mongoDataAccess;
+import com.br.mongo.data.mongoDataAccess;
 import javax.swing.JOptionPane;
 
 public class mongoOpen {

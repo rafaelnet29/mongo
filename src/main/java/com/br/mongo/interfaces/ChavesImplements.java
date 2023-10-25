@@ -1,4 +1,4 @@
-package com.br.interfaces;
+package com.br.mongo.interfaces;
 
 public class ChavesImplements implements InterfaceChaves {
 
