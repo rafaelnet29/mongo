@@ -31,9 +31,9 @@ public class mongoDataAccess {
         if (client != null) {
             db = client.getDatabase("personagens");
             coll = db.getCollection("nomes");
-            JOptionPane.showMessageDialog(null, "Conectado com sucesso !");
+            JOptionPane.showMessageDialog(null, " Conectado com sucesso ! ");
         } else {
-            JOptionPane.showMessageDialog(null, "Problemas com a conexão");
+            JOptionPane.showMessageDialog(null, " Problemas com a conexão ");
         }
     }
 
@@ -110,11 +110,11 @@ public class mongoDataAccess {
             } else {
                 coll.updateOne(new Document(doc), new Document(operador, new Document(new Document(chave, Arrays.asList(valor)))));
             }
-            JOptionPane.showMessageDialog(null, "Document atualizado com sucesso!");
+            JOptionPane.showMessageDialog(null, " Document atualizado com sucesso!  ");
 
             FindAll();
         } catch (IllegalArgumentException ex) {
-            JOptionPane.showMessageDialog(null, "Argumento inserido errado", "Atenção", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, " Argumento inserido errado", "Atenção ", JOptionPane.ERROR_MESSAGE);
         }
     }
     //Método para deletar Documents
