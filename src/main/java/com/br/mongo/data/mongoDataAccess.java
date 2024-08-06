@@ -1,10 +1,14 @@
 package com.br.mongo.data;
 
+import com.br.mongo.interfaces.ChavesImplements;
+import com.br.mongo.model.mongoModel;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,11 +23,19 @@ public class mongoDataAccess {
     private MongoDatabase db;
     private Document doc = null;
     private ObjectMapper pretty = null;
+    private mongoModel model = null;
+    private List<String> tec = null;
+    private List<Document> list = null;
+    private ChavesImplements ci = null;
 
     //Método construtor
     public mongoDataAccess() {
         this.doc = new Document();
         this.pretty = new ObjectMapper();
+        this.model = new mongoModel();
+        this.tec = new ArrayList<>();
+        this.list = new ArrayList();
+        this.ci = new ChavesImplements();
     }
 
     public void Connect() {
@@ -38,13 +50,39 @@ public class mongoDataAccess {
     }
 
     //Método de inserção de um único Document
-    public void InsertOneAux() {
-        coll.insertOne(new mongoDataAccessAux().insertOneAux());
+    public Document InsertOneAux() {
+        //coll.insertOne(new mongoDataAccessAux().insertOneAux());
+        model.setIdValor(JOptionPane.showInputDialog("Informe o id"));
+        model.setNomeValor(JOptionPane.showInputDialog("Informe o nome: "));
+        model.setIddValor(Integer.parseInt(JOptionPane.showInputDialog("Informe a idade: ")));
+        model.setDescricaoValor(JOptionPane.showInputDialog("Informe a descrição: "));
+        model.setTecnicasValor(JOptionPane.showInputDialog("Informe as habilidades " + "(sepere-as por vígula): ").split(","));
+        tec.addAll(Arrays.asList(model.getTecnicasValor()));
+
+        //inserindo dados no Document
+        doc.append(ci.Id(), model.getIdValor()).append(ci.Nome(), model.getNomeValor())
+                .append(ci.Idade(), model.getIddValor()).append(ci.Descricao(), model.getDescricaoValor())
+                .append(ci.Tecnicas(), tec);
+        coll.insertOne(doc);
+        JOptionPane.showMessageDialog(null, " Document inserido com sucesso ");
+        return doc;
     }
 
     //Método de insersão de varios Documents
     public void InsertManyAux() {
-        new mongoDataAccessAux().insertManyAux();
+        //new mongoDataAccessAux().insertManyAux();
+        @SuppressWarnings("UnusedAssignment")
+        int op = 0;
+        do {
+            doc = InsertOneAux();
+            Document[] docx = {doc};
+            for (int i = 0; i < docx.length; i++) {
+                list.add(docx[i]);
+            }
+            op = Integer.parseInt(JOptionPane.showInputDialog("Continuar: 1-Sim, 0-Não"));
+        } while (op != 0);
+        coll.insertMany(list);
+        JOptionPane.showMessageDialog(null, " Documents insiridos com sucesso ");
     }
 
     //Método para listar os Documents
@@ -56,7 +94,7 @@ public class mongoDataAccess {
                 for (int i = 0; i < nomes.length; i++) {
                     try {
                         String json = pretty.writerWithDefaultPrettyPrinter().writeValueAsString(nomes[i]);
-                        System.out.println( json + " \n ");
+                        System.out.println(json + " \n ");
                     } catch (IOException ex) {
                         Logger.getLogger(mongoDataAccess.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -79,7 +117,7 @@ public class mongoDataAccess {
                 for (int i = 0; i < nomes.length; i++) {
                     try {
                         String json = pretty.writerWithDefaultPrettyPrinter().writeValueAsString(nomes[i]);
-                        System.out.println( json + " \n ");
+                        System.out.println(json + " \n ");
                     } catch (IOException ex) {
                         Logger.getLogger(mongoDataAccess.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -90,8 +128,8 @@ public class mongoDataAccess {
     }
 
     /**
-     * Método para atualizar document com os operadores $set $push
-     * funciona, mas precisa de melhorias
+     * Método para atualizar document com os operadores $set $push funciona, mas
+     * precisa de melhorias
      */
     public void updateOne() {
         try {
