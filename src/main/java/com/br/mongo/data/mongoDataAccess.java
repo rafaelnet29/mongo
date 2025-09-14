@@ -134,22 +134,45 @@ public class mongoDataAccess {
     public void updateOne() {
         Document doc = new Document();
         try {
-            doc = findOne();
+            // Filtro para localizar o documento
+            String filtroChave = JOptionPane.showInputDialog("Informe a chave de busca (ex: _id, Nome):");
+            String filtroValor = JOptionPane.showInputDialog("Informe o valor da chave:");
 
-            /**
-             * informa aqui com qual chave o Document será atualizado
-             */
-            String chave = JOptionPane.showInputDialog("Informe a Chave: ");
-            String valor = JOptionPane.showInputDialog("Informe o Valor: ");
+            Document filtro = new Document(filtroChave, filtroValor);
 
-            String operador = JOptionPane.showInputDialog("Informe o operador :  $set");
-            //Faz alusão a db.<collection>.updateOne({filtro},{operador : {dado substituto}})
-            if (!valor.equals("Tecnicas")) {
-                coll.updateOne(new Document(doc), new Document(operador, new Document(new Document(chave, valor))));
+            // Operador MongoDB
+            String operador = JOptionPane.showInputDialog("Informe o operador (ex: $set, $push, $pull, $inc, $unset):");
+
+            // Campo a ser alterado
+            String campo = JOptionPane.showInputDialog("Informe o campo a ser alterado:");
+
+            // Valor novo
+            String valor = JOptionPane.showInputDialog("Informe o novo valor:");
+
+            // Verifica se é array (separado por vírgulas)
+            Document atualizacao;
+            if (operador.equals("$unset")) {
+                atualizacao = new Document(operador, new Document(campo, ""));
+            } else if (valor.contains(",")) {
+                List<String> valores = Arrays.asList(valor.split(","));
+                atualizacao = new Document(operador, new Document(campo, valores));
             } else {
-                coll.updateOne(new Document(doc), new Document(operador, new Document(new Document(chave, Arrays.asList(valor)))));
+                if (operador.equals("$inc")) {
+                    try {
+                        int numero = Integer.parseInt(valor);
+                        atualizacao = new Document(operador, new Document(campo, numero));
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null, "Valor inválido para incremento.");
+                        return;
+                    }
+                } else {
+                    atualizacao = new Document(operador, new Document(campo, valor));
+                }
             }
-            JOptionPane.showMessageDialog(null, " Document atualizado com sucesso!  ");
+
+            // Executa a atualização
+            coll.updateOne(filtro, atualizacao);
+            JOptionPane.showMessageDialog(null, "Documento atualizado com sucesso!");
 
             FindAll();
         } catch (IllegalArgumentException ex) {
