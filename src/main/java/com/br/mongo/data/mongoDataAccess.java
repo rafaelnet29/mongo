@@ -21,7 +21,6 @@ public class mongoDataAccess {
     private MongoCollection<Document> coll;
     private MongoClient client = null;
     private MongoDatabase db;
-    private Document doc = null;
     private ObjectMapper pretty = null;
     private mongoModel model = null;
     private List<String> tec = null;
@@ -30,7 +29,6 @@ public class mongoDataAccess {
 
     //Método construtor
     public mongoDataAccess() {
-        this.doc = new Document();
         this.pretty = new ObjectMapper();
         this.model = new mongoModel();
         this.tec = new ArrayList<>();
@@ -51,6 +49,7 @@ public class mongoDataAccess {
 
     //Método de inserção de um único Document
     public Document InsertOneAux() {
+        Document doc = new Document();
         //coll.insertOne(new mongoDataAccessAux().insertOneAux());
         model.setIdValor(JOptionPane.showInputDialog("Informe o id"));
         model.setNomeValor(JOptionPane.showInputDialog("Informe o nome: "));
@@ -70,6 +69,7 @@ public class mongoDataAccess {
 
     //Método de insersão de varios Documents
     public void InsertManyAux() {
+        Document doc = new Document();
         //new mongoDataAccessAux().insertManyAux();
         @SuppressWarnings("UnusedAssignment")
         int op = 0;
@@ -105,7 +105,7 @@ public class mongoDataAccess {
 
     //Método para busca de um único document
     public Document findOne() {
-
+        Document doc = new Document();
         String chave = JOptionPane.showInputDialog("Informe qual a Chave : ");
         String valor = JOptionPane.showInputDialog("Informe o Valor : ");
 
@@ -132,6 +132,7 @@ public class mongoDataAccess {
      * precisa de melhorias
      */
     public void updateOne() {
+        Document doc = new Document();
         try {
             doc = findOne();
 
@@ -158,6 +159,7 @@ public class mongoDataAccess {
     //Método para deletar Documents
 
     public void deleteOne() {
+        Document doc = new Document();
         doc = findOne();
         int opc = JOptionPane.showConfirmDialog(null, "Tem certeza que quer deletar o Document: "
                 + doc, " Atenção! ", JOptionPane.YES_NO_CANCEL_OPTION);
